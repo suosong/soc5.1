@@ -3,7 +3,7 @@ using System.Collections;
 
 public class camera_Script1 : MonoBehaviour {
 
-    private GameObject ball;
+    private GameObject ball = null;
     private Vector3 offset;
 	// Use this for initialization
 	void Start () {
