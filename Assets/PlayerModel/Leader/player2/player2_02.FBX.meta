@@ -1,0 +1,166 @@
+fileFormatVersion: 2
+guid: 60258cebd225b9f4fbb8ad90a27ec451
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Bip01
+    100002: Bip01 Head
+    100004: Bip01 L Calf
+    100006: Bip01 L Clavicle
+    100008: Bip01 L Foot
+    100010: Bip01 L Forearm
+    100012: Bip01 L Hand
+    100014: Bip01 L Thigh
+    100016: Bip01 L Toe0
+    100018: Bip01 L UpperArm
+    100020: Bip01 Neck
+    100022: Bip01 Pelvis
+    100024: Bip01 Prop1
+    100026: Bip01 Prop2
+    100028: Bip01 R Calf
+    100030: Bip01 R Clavicle
+    100032: Bip01 R Foot
+    100034: Bip01 R Forearm
+    100036: Bip01 R Hand
+    100038: Bip01 R Thigh
+    100040: Bip01 R Toe0
+    100042: Bip01 R UpperArm
+    100044: Bip01 Spine
+    100046: Bip01 Spine1
+    100048: Bone004
+    100050: Bone004(mirrored)
+    100052: Bone005
+    100054: Bone005(mirrored)
+    100056: Bone006
+    100058: Bone006(mirrored)
+    100060: Bone007
+    100062: Bone007(mirrored)
+    100064: Bone008
+    100066: Bone008(mirrored)
+    100068: Bone009
+    100070: Bone009(mirrored)
+    100072: Bone010
+    100074: Bone010(mirrored)
+    100076: Bone011
+    100078: Bone011(mirrored)
+    100080: Bone012
+    100082: Bone012(mirrored)
+    100084: Bone013
+    100086: Bone013(mirrored)
+    100088: Bone014
+    100090: Bone014(mirrored)
+    100092: Dummy_weaponL
+    100094: Dummy_weaponR
+    100096: player2
+    100098: //RootNode
+    100100: root_motion
+    400000: Bip01
+    400002: Bip01 Head
+    400004: Bip01 L Calf
+    400006: Bip01 L Clavicle
+    400008: Bip01 L Foot
+    400010: Bip01 L Forearm
+    400012: Bip01 L Hand
+    400014: Bip01 L Thigh
+    400016: Bip01 L Toe0
+    400018: Bip01 L UpperArm
+    400020: Bip01 Neck
+    400022: Bip01 Pelvis
+    400024: Bip01 Prop1
+    400026: Bip01 Prop2
+    400028: Bip01 R Calf
+    400030: Bip01 R Clavicle
+    400032: Bip01 R Foot
+    400034: Bip01 R Forearm
+    400036: Bip01 R Hand
+    400038: Bip01 R Thigh
+    400040: Bip01 R Toe0
+    400042: Bip01 R UpperArm
+    400044: Bip01 Spine
+    400046: Bip01 Spine1
+    400048: Bone004
+    400050: Bone004(mirrored)
+    400052: Bone005
+    400054: Bone005(mirrored)
+    400056: Bone006
+    400058: Bone006(mirrored)
+    400060: Bone007
+    400062: Bone007(mirrored)
+    400064: Bone008
+    400066: Bone008(mirrored)
+    400068: Bone009
+    400070: Bone009(mirrored)
+    400072: Bone010
+    400074: Bone010(mirrored)
+    400076: Bone011
+    400078: Bone011(mirrored)
+    400080: Bone012
+    400082: Bone012(mirrored)
+    400084: Bone013
+    400086: Bone013(mirrored)
+    400088: Bone014
+    400090: Bone014(mirrored)
+    400092: Dummy_weaponL
+    400094: Dummy_weaponR
+    400096: player2
+    400098: //RootNode
+    400100: root_motion
+    4300000: player2
+    7400000: Take 001
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: player2
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .100000001
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  additionalBone: 0
+  userData: 
