@@ -82,7 +82,10 @@ public class ControlScript : MonoBehaviour {
         }
 
         CharacterController controller = cur_player.GetComponent<CharacterController>();
-	    //float s = Input.GetAxis("Horizontal");
+        Animator anim = cur_player.GetComponent<Animator>();
+
+        bool is_running = false;
+
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             Change_cur_player();
@@ -92,31 +95,42 @@ public class ControlScript : MonoBehaviour {
         {
             //anim.Play("run");
             controller.Move(new Vector3(0, 0, move_speed));
+            is_running = true;
         }
 
         if (Input.GetKey(KeyCode.S))
         {
             //anim.Play("attack1");
             controller.Move(new Vector3(0, 0, -move_speed));
+            is_running = true;
         }
 
         if (Input.GetKey(KeyCode.A))
         {
             //anim.Play("run");
             controller.Move(new Vector3(-move_speed, 0, 0));
+            is_running = true;
         }
 
         if (Input.GetKey(KeyCode.D))
         {
             //anim.Play("attack1");
             controller.Move(new Vector3(move_speed, 0, 0));
+            is_running = true;
         }
 
-        if (holder == cur_player)
+        anim.SetBool("is_running", is_running);
+
+        if (Input.GetKeyDown(KeyCode.J))
         {
-            if (Input.GetKey(KeyCode.J))
+            if (holder == cur_player)
             {
-                rb.AddForce(holder.transform.forward * 200);
+                //rb.AddForce(holder.transform.forward * 200);
+                anim.SetTrigger("Trigger kick");
+            }
+            else
+            {
+                anim.SetTrigger("Trigger slide tackle");
             }
         }
 	}

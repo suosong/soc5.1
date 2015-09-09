@@ -15,7 +15,6 @@ public class player2controlScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
         Vector3 move = Physics.gravity * Time.deltaTime;
         controller.Move(move);
 	}
