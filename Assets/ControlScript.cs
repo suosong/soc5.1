@@ -63,12 +63,21 @@ public class ControlScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         // 无持球人或持球时间超过0.3秒情况下，距离球小于0.2米且是与球距离最近的人获得球
+        if (holder)
+        {
+            soccer.transform.parent = holder.transform;
+            soccer.transform.localPosition = new Vector3(3.2f, -0.74f, 0);
+        }
+
         hold_time = hold_time + Time.deltaTime;
         if (!holder || hold_time > 0.3)
         {
-            float dis_min = 2.2f;
+            float dis_min = 2.3f;
             foreach (GameObject player in players)
             {
+                if (player == holder)
+                    continue;
+
                 float dis = Vector3.Distance(soccer.transform.position, player.transform.position);
                 if (dis_min > dis) 
                 {
@@ -76,7 +85,7 @@ public class ControlScript : MonoBehaviour {
                     holder = player;
                     hold_time = 0;
                     soccer.transform.parent = holder.transform;
-                    soccer.transform.localPosition = new Vector3(1, -0.74f, 0);
+                    soccer.transform.localPosition = new Vector3(3.2f, -0.74f, 0);
                 }
             }
         }
@@ -125,8 +134,11 @@ public class ControlScript : MonoBehaviour {
         {
             if (holder == cur_player)
             {
-                //rb.AddForce(holder.transform.forward * 200);
-                anim.SetTrigger("Trigger kick");
+                rb.AddForce(holder.transform.forward * 400);
+                //anim.SetTrigger("Trigger kick");
+
+                holder = null;
+                soccer.transform.parent = null;
             }
             else
             {
