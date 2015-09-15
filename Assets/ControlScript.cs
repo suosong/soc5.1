@@ -11,6 +11,10 @@ public class ControlScript : MonoBehaviour {
     public GameObject cur_player = null;
     private const float move_speed = 0.1f;
     public Rigidbody rb = null;
+    public Vector3 forward_w = new Vector3(1, 0, 1);
+    public Vector3 forward_s = new Vector3(-1, 0, -1);
+    public Vector3 forward_a = new Vector3(-1, 0, 1);
+    public Vector3 forward_d = new Vector3(1, 0, -1);
 
     private bool FindPlayer(GameObject player)
     {
@@ -43,10 +47,6 @@ public class ControlScript : MonoBehaviour {
         {
             cur_player = players[cur_player_index+1];
         }
-
-        //Animator anim = cur_player.GetComponent<Animator>();
-        //if (anim) 
-        //anim.Play("attack1");
     }
 
 
@@ -94,6 +94,8 @@ public class ControlScript : MonoBehaviour {
         Animator anim = cur_player.GetComponent<Animator>();
 
         bool is_running = false;
+        int f_w = 0, f_s = 0, f_a = 0, f_d = 0;
+
 
         if (Input.GetKeyDown(KeyCode.Tab))
         {
@@ -102,31 +104,33 @@ public class ControlScript : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.W))
         {
-            //anim.Play("run");
             controller.Move(new Vector3(0, 0, move_speed));
             is_running = true;
+            f_w = 1;
         }
 
         if (Input.GetKey(KeyCode.S))
         {
-            //anim.Play("attack1");
             controller.Move(new Vector3(0, 0, -move_speed));
             is_running = true;
+            f_s = 1;
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            //anim.Play("run");
             controller.Move(new Vector3(-move_speed, 0, 0));
             is_running = true;
+            f_a = 1;
         }
 
         if (Input.GetKey(KeyCode.D))
         {
-            //anim.Play("attack1");
             controller.Move(new Vector3(move_speed, 0, 0));
             is_running = true;
+            f_d = 1;
         }
+
+        cur_player.transform.forward = f_w * forward_w + f_s * forward_s + f_a * forward_a + f_d * forward_d;
 
         anim.SetBool("is_running", is_running);
 
