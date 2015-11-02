@@ -152,7 +152,7 @@ public class ControlScript : MonoBehaviour {
         {
             if (holder == cur_player)
             {
-                rb.AddForce(holder.transform.forward * 400);
+                rb.AddForce(get_pass_dir() * 400);
                 //anim.SetTrigger("Trigger kick");
 
                 holder = null;
@@ -166,6 +166,11 @@ public class ControlScript : MonoBehaviour {
 
         Debug.Log("ori " + cur_player.transform.forward.x.ToString() + "  " + cur_player.transform.forward.y.ToString() + "  " + cur_player.transform.forward.z.ToString());
 	}
+
+    Vector3 get_pass_dir()
+    {
+        return holder.transform.forward;
+    }
 
     void change_cur_player_rotation()
     {
