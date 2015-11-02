@@ -15,6 +15,9 @@ public class ControlScript : MonoBehaviour {
     public Vector3 forward_s = new Vector3(-1, 0, -1);
     public Vector3 forward_a = new Vector3(-1, 0, 1);
     public Vector3 forward_d = new Vector3(1, 0, -1);
+    public Vector3 cur_forward;
+    public bool cur_forward_changing = false;
+    public const float forward_change_delta = 0.20f;
 
     private bool FindPlayer(GameObject player)
     {
@@ -47,6 +50,8 @@ public class ControlScript : MonoBehaviour {
         {
             cur_player = players[cur_player_index+1];
         }
+
+        cur_forward_changing = false;
     }
 
 
@@ -58,6 +63,7 @@ public class ControlScript : MonoBehaviour {
         players.Add(GameObject.Find("player3"));
         players.Add(GameObject.Find("player2"));
         cur_player = GameObject.Find("player2");
+
 	}
 	
 	// Update is called once per frame
@@ -130,7 +136,15 @@ public class ControlScript : MonoBehaviour {
             f_d = 1;
         }
 
-        cur_player.transform.forward = f_w * forward_w + f_s * forward_s + f_a * forward_a + f_d * forward_d;
+        if (f_w != 0 || f_s != 0 || f_a != 0 || f_d != 0)
+        {
+            //cur_player.transform.forward = f_w * forward_w + f_s * forward_s + f_a * forward_a + f_d * forward_d;
+            cur_forward = f_w * forward_w + f_s * forward_s + f_a * forward_a + f_d * forward_d;
+            cur_forward_changing = true;
+        }
+
+        change_cur_player_rotation();
+            
 
         anim.SetBool("is_running", is_running);
 
@@ -149,5 +163,40 @@ public class ControlScript : MonoBehaviour {
                 anim.SetTrigger("Trigger slide tackle");
             }
         }
+
+        Debug.Log("ori " + cur_player.transform.forward.x.ToString() + "  " + cur_player.transform.forward.y.ToString() + "  " + cur_player.transform.forward.z.ToString());
 	}
+
+    void change_cur_player_rotation()
+    {
+        if (!cur_forward_changing)
+            return;
+
+        float f_x = 0;
+        float f_z = 0;
+
+        if (Mathf.Abs(cur_forward.x - cur_player.transform.forward.x) < forward_change_delta)
+            f_x = cur_forward.x;
+            //cur_player.transform.forward = new Vector3(0, cur_forward.x, 0);
+        else if (cur_forward.x > cur_player.transform.forward.x)
+            f_x = cur_player.transform.forward.x + forward_change_delta;
+            //cur_player.transform.forward = new Vector3(0, cur_player.transform.forward.x + forward_change_delta, 0);
+        else
+            f_x = cur_player.transform.forward.x - forward_change_delta;
+            //cur_player.transform.forward = new Vector3(0, cur_player.transform.forward.x - forward_change_delta, 0);
+
+        if (Mathf.Abs(cur_forward.z - cur_player.transform.forward.z) < forward_change_delta)
+            f_z = cur_forward.z;
+            //cur_player.transform.forward = new Vector3(0, cur_forward.z, 0);
+        else if (cur_forward.z > cur_player.transform.forward.z)
+            f_z = cur_player.transform.forward.z + forward_change_delta;
+            //cur_player.transform.forward = new Vector3(0, cur_player.transform.forward.z + forward_change_delta, 0);
+        else
+            f_z = cur_player.transform.forward.z - forward_change_delta;
+            //cur_player.transform.forward = new Vector3(0, cur_player.transform.forward.z - forward_change_delta, 0);
+
+        cur_player.transform.forward = new Vector3(f_x, 0, f_z);
+        if (cur_forward.x == cur_player.transform.forward.x && cur_forward.z == cur_player.transform.forward.z)
+            cur_forward_changing = false;
+    }
 }
