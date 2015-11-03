@@ -2,6 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 
+public struct PassBallDir
+{
+    public Vector3 dir;
+    public float time_elapsed;
+}
+
 public class ControlScript : MonoBehaviour {
 
     private float hold_time = 0; // 被持球时长
@@ -18,6 +24,10 @@ public class ControlScript : MonoBehaviour {
     public Vector3 cur_forward;
     public bool cur_forward_changing = false;
     public const float forward_change_delta = 0.20f;
+    public const float pass_ball_error_angle = 200;
+
+    // pass ball dir
+    public PassBallDir pass_ball_dir_input;
 
     private bool FindPlayer(GameObject player)
     {
@@ -143,6 +153,8 @@ public class ControlScript : MonoBehaviour {
             cur_forward_changing = true;
         }
 
+        update_pass_ball_dir(f_w, f_s, f_a, f_d);
+
         change_cur_player_rotation();
             
 
@@ -167,9 +179,36 @@ public class ControlScript : MonoBehaviour {
         Debug.Log("ori " + cur_player.transform.forward.x.ToString() + "  " + cur_player.transform.forward.y.ToString() + "  " + cur_player.transform.forward.z.ToString());
 	}
 
+    void update_pass_ball_dir(int f_w, int f_s, int f_a, int f_d)
+    {
+        if (f_w == 0 && f_s == 0 && f_a == 0 && f_d == 0)
+        {
+            pass_ball_dir_input.time_elapsed += Time.deltaTime;
+            return;
+        }
+
+        pass_ball_dir_input.time_elapsed = 0;
+        pass_ball_dir_input.dir = f_w * forward_w + f_s * forward_s + f_a * forward_a + f_d * forward_d;
+    }
+
     Vector3 get_pass_dir()
     {
-        return holder.transform.forward;
+        Vector3 pass_ball_dir = pass_ball_dir_input.time_elapsed > 0.4 ? holder.transform.forward : pass_ball_dir_input.dir;
+
+        // 找出与传球方向最接近的队友
+        GameObject player_pass_to = null;
+        float angle;
+        foreach (GameObject player in players)
+        {
+            if (player == holder)
+                continue;
+
+            //pass_ball_dir.
+        }
+
+
+
+        return pass_ball_dir;
     }
 
     void change_cur_player_rotation()
