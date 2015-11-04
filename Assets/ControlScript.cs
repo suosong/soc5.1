@@ -26,6 +26,8 @@ public class ControlScript : MonoBehaviour {
     public const float forward_change_delta = 0.20f;
     public const float pass_ball_error_angle = 200;
 
+    public float J_down_time;
+
     // pass ball dir
     public PassBallDir pass_ball_dir_input;
 
@@ -160,23 +162,50 @@ public class ControlScript : MonoBehaviour {
 
         anim.SetBool("is_running", is_running);
 
-        if (Input.GetKeyDown(KeyCode.J))
+        if (Input.GetKeyUp(KeyCode.J))
         {
             if (holder == cur_player)
             {
-                rb.AddForce(get_pass_dir() * 400);
+                rb.AddForce(get_pass_dir() * 400 * J_down_time * 100);
                 //anim.SetTrigger("Trigger kick");
 
                 holder = null;
                 soccer.transform.parent = null;
             }
-            else
+        }
+
+        if (Input.GetKey(KeyCode.J))
+        {
+            if (holder == cur_player)
+            {
+                J_down_time += Time.deltaTime;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            if (holder == cur_player)
+            {
+                J_down_time = 0;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            if (holder != cur_player)
             {
                 anim.SetTrigger("Trigger slide tackle");
             }
         }
 
-        Debug.Log("ori " + cur_player.transform.forward.x.ToString() + "  " + cur_player.transform.forward.y.ToString() + "  " + cur_player.transform.forward.z.ToString());
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            holder = cur_player;
+            soccer.transform.parent = cur_player.transform;
+            soccer.transform.localPosition = new Vector3(3.2f, -0.74f, 0);
+        }
+
+        //Debug.Log("ori " + cur_player.transform.forward.x.ToString() + "  " + cur_player.transform.forward.y.ToString() + "  " + cur_player.transform.forward.z.ToString());
 	}
 
     void update_pass_ball_dir(int f_w, int f_s, int f_a, int f_d)
@@ -197,18 +226,27 @@ public class ControlScript : MonoBehaviour {
 
         // 找出与传球方向最接近的队友
         GameObject player_pass_to = null;
-        float angle;
+        float delta_angle = pass_ball_error_angle ;
         foreach (GameObject player in players)
         {
             if (player == holder)
                 continue;
 
-            //pass_ball_dir.
+            float angle = Mathf.Min(Vector3.Angle(pass_ball_dir, player.transform.position - holder.transform.position),
+                Vector3.Angle(player.transform.position - holder.transform.position, pass_ball_dir));
+            if (angle > pass_ball_error_angle)
+                continue;
+
+            if (angle < delta_angle)
+            {
+                delta_angle = angle;
+                player_pass_to = player;
+            }
         }
 
 
 
-        return pass_ball_dir;
+        return player_pass_to == null ? pass_ball_dir.normalized : (player_pass_to.transform.position - holder.transform.position).normalized;
     }
 
     void change_cur_player_rotation()
