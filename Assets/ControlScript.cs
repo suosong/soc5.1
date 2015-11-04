@@ -85,6 +85,7 @@ public class ControlScript : MonoBehaviour {
         {
             soccer.transform.parent = holder.transform;
             soccer.transform.localPosition = new Vector3(3.2f, -0.74f, 0);
+            rb.velocity = Vector3.zero;
         }
 
         hold_time = hold_time + Time.deltaTime;
@@ -166,7 +167,7 @@ public class ControlScript : MonoBehaviour {
         {
             if (holder == cur_player)
             {
-                rb.AddForce(get_pass_dir() * 400 * J_down_time * 100);
+                rb.AddForce(get_pass_ball_force());
                 //anim.SetTrigger("Trigger kick");
 
                 holder = null;
@@ -207,6 +208,14 @@ public class ControlScript : MonoBehaviour {
 
         //Debug.Log("ori " + cur_player.transform.forward.x.ToString() + "  " + cur_player.transform.forward.y.ToString() + "  " + cur_player.transform.forward.z.ToString());
 	}
+
+    Vector3 get_pass_ball_force()
+    {
+        float force_ratio = J_down_time * 10000;
+        if (force_ratio > 3000)
+            force_ratio = 3000;
+        return get_pass_dir() * force_ratio;
+    }
 
     void update_pass_ball_dir(int f_w, int f_s, int f_a, int f_d)
     {
