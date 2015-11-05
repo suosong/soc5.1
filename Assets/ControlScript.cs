@@ -241,8 +241,8 @@ public class ControlScript : MonoBehaviour {
             if (player == holder)
                 continue;
 
-            float angle = Mathf.Min(Vector3.Angle(pass_ball_dir, player.transform.position - holder.transform.position),
-                Vector3.Angle(player.transform.position - holder.transform.position, pass_ball_dir));
+            float angle = Mathf.Min(Vector3.Angle(pass_ball_dir, player.transform.position - soccer.transform.position),
+                Vector3.Angle(player.transform.position - soccer.transform.position, pass_ball_dir));
             if (angle > pass_ball_error_angle)
                 continue;
 
@@ -255,7 +255,7 @@ public class ControlScript : MonoBehaviour {
 
 
 
-        return player_pass_to == null ? pass_ball_dir.normalized : (player_pass_to.transform.position - holder.transform.position).normalized;
+        return player_pass_to == null ? pass_ball_dir.normalized : (player_pass_to.transform.position - soccer.transform.position).normalized;
     }
 
     void change_cur_player_rotation()
