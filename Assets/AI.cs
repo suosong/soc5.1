@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class none : MonoBehaviour {
+public class AI : MonoBehaviour {
     public float length_pos = 0.5f; // 最左边是 0，最右边是 1
     public float width_pos = 0.5f;  // 最下边是 0，最上边是 1
 
@@ -18,6 +18,8 @@ public class none : MonoBehaviour {
 
     public CharacterController controller;
 
+    public ControlScript cs;
+
 	// Use this for initialization
 	void Start () {
         controller = gameObject.GetComponent<CharacterController>();
@@ -25,7 +27,9 @@ public class none : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if 
+        if (cs && cs.get_holder() == gameObject)
+            return;
+
         Vector3 target_pos = get_pos();
         controller.Move((target_pos - gameObject.transform.position).normalized * move_speed);
 	}

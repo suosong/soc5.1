@@ -31,6 +31,11 @@ public class ControlScript : MonoBehaviour {
     // pass ball dir
     public PassBallDir pass_ball_dir_input;
 
+    public GameObject get_holder()
+    {
+        return holder;
+    }
+
     private bool FindPlayer(GameObject player)
     {
 
